@@ -1,0 +1,6 @@
+status,type,clientName,amount
+Pending,Withdrawal,Jane Doe,50.25
+Completed,Refill,John Smith,100.00
+Cancelled,Withdrawal,Alice Johnson,75.50
+Completed,Refill,Bob Brown,200.75
+Pending,Withdrawal,Eve White,60.10
