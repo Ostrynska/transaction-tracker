@@ -6,7 +6,7 @@ const LOCAL_STORAGE_KEY = 'transactions_db';
 
 export const initDatabase = async () => {
   const SQL = await initSqlJs({ locateFile: (file: unknown) => `https://sql.js.org/dist/${file}` });
-  
+
   const savedDb = localStorage.getItem(LOCAL_STORAGE_KEY);
   if (savedDb) {
     const savedData = Uint8Array.from(atob(savedDb), c => c.charCodeAt(0));
@@ -135,7 +135,8 @@ const transactions = [
 
 const saveDatabase = () => {
   const data = db.export();
-  const base64Data = btoa(String.fromCharCode.apply(null, data));
+  const array = Array.from(data);
+  const base64Data = btoa(String.fromCharCode.apply(null, array));
   localStorage.setItem(LOCAL_STORAGE_KEY, base64Data);
 };
 
