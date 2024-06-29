@@ -49,8 +49,8 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction, onEdit, 
           size="md"
           colorScheme="teal"
           variant='ghost'
-                      onClick={handleEditClick} 
-                      aria-label='Edit'
+          onClick={handleEditClick} 
+          aria-label='Edit'
                   />
         <IconButton
           icon={<MdDelete size={18}/>}
