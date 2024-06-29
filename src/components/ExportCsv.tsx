@@ -18,7 +18,7 @@ interface ExportFormInputs {
   amount: boolean;
 }
 
-const ExportCsv: React.FC<ExportCSVProps> = ({ transactions, onBackClick }) => {
+const ExportCsv: React.FC<ExportCSVProps> = ({ transactions }) => {
   const { register, handleSubmit, watch } = useForm<ExportFormInputs>({
     defaultValues: {
       id: true,
@@ -81,9 +81,6 @@ const ExportCsv: React.FC<ExportCSVProps> = ({ transactions, onBackClick }) => {
 
   return (
     <Box>
-      <Button onClick={onBackClick} mb={4} colorScheme="teal" variant="outline">
-        Back
-      </Button>
       <form onSubmit={handleSubmit(onExportSubmit)}>
         <FormControl as="fieldset">
           <FormLabel as="legend">Select columns to export:</FormLabel>
