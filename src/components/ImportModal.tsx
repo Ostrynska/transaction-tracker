@@ -32,25 +32,27 @@ const ImportModal: React.FC<ImportModalProps> = ({ isOpen, onRequestClose, onImp
     }
   };
 
-  const validateCSV = (data: unknown[]): data is Transaction[] => {
-    if (!Array.isArray(data)) {
+const validateCSV = (data: unknown[]): data is Transaction[] => {
+  if (!Array.isArray(data)) {
+    return false;
+  }
+
+  for (const item of data) {
+    if (
+      typeof item !== 'object' ||
+      item === null ||
+      !('status' in item) ||
+      !('type' in item) ||
+      !('clientName' in item) ||
+      !('amount' in item)
+    ) {
       return false;
     }
+  }
 
-    for (const item of data) {
-      if (
-        typeof item !== 'object' ||
-        !('status' in item) ||
-        !('type' in item) ||
-        !('clientName' in item) ||
-        !('amount' in item)
-      ) {
-        return false;
-      }
-    }
+  return true;
+};
 
-    return true;
-  };
 
   const handleImport = () => {
     if (file) {
