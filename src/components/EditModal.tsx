@@ -16,24 +16,46 @@ import {
   FormErrorMessage
 } from '@chakra-ui/react';
 
+interface EditFormData {
+  status: string;
+  type: string;
+  clientName: string;
+  amount: string;
+}
+
 interface EditModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
   transaction: { id: number, status: string, type: string, clientName: string, amount: number };
-  onEdit: (id: number, updatedTransaction: Partial<{ status: string; type: string; clientName: string; amount: number }>) => void;
+  onEdit: (id: number, updatedTransaction: Partial<EditFormData>) => void;
 }
 
 const EditModal: React.FC<EditModalProps> = ({ isOpen, onRequestClose, transaction, onEdit }) => {
-  const { register, handleSubmit, reset, formState: { errors }, trigger } = useForm({
-    defaultValues: transaction
+  const { register, handleSubmit, reset, formState: { errors }, trigger } = useForm<EditFormData>({
+    defaultValues: {
+      status: transaction.status,
+      type: transaction.type,
+      clientName: transaction.clientName,
+      amount: transaction.amount.toString(),
+    }
   });
 
   useEffect(() => {
-    reset(transaction);
+    reset({
+      status: transaction.status,
+      type: transaction.type,
+      clientName: transaction.clientName,
+      amount: transaction.amount.toString(),
+    });
   }, [transaction, reset]);
 
-  const onSubmit = (data: any) => {
-    onEdit(transaction.id, data);
+  const onSubmit = (data: EditFormData) => {
+    onEdit(transaction.id, {
+      status: data.status,
+      type: data.type,
+      clientName: data.clientName,
+      amount: data.amount.replace(',', '.')
+    });
     onRequestClose();
   };
 
