@@ -10,38 +10,24 @@ const Footer: React.FC = () => {
       <Flex justify="space-between" align="center" maxW="1200px" mx="auto" >
         <Link href="https://ostrynska-kateryna.netlify.app/" isExternal color="teal.500" fontWeight="bold">
               Ostrynska Kateryna &copy; 2024</Link>
-      <Box>
+      <Flex>
       <Link
         href="https://t.me/kateryna_ostrynska"
         isExternal
-        aria-label="Telegram"
-      >
-        <IconButton
-          icon={<FaTelegramPlane size={18}/>}
-          size="md"
-          colorScheme="teal"
-          variant='ghost'
-          aria-label="Telegram"
-        />
+        marginRight='10px'
+        aria-label="Telegram">
+          <FaTelegramPlane size={18} color='teal'/>
       </Link>
       <Link
         href="https://www.linkedin.com/in/kateryna-ostrynska-9155b0151/"
         isExternal
-        aria-label="LinkedIn"
-      >
-        <IconButton
-          icon={<FaLinkedin size={18}/>}
-          size="md"
-          colorScheme="teal"
-          variant='ghost'
-          aria-label="LinkedIn"
-        />
+        aria-label="LinkedIn" >
+          <FaLinkedin size={18} color='teal'/>
       </Link>
-        </Box>
+        </Flex>
       </Flex>
     </Box>
     </>
-   
   );
 };
 
