@@ -11,7 +11,7 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 const Home: React.FC = () => {
   const [isImportModalOpen, setImportModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filters, setFilters] = useState({ status: '', type: '' });
+  const [filters, setFilters] = useState<{ status: string; type: string; amountRange: [number, number] }>({ status: '', type: '', amountRange: [0, 1000] });
   const [isExportMode, setIsExportMode] = useState(false);
   const queryClient = useQueryClient();
 
@@ -73,8 +73,15 @@ const Home: React.FC = () => {
     setIsExportMode(false);
   };
 
+  const handleRefresh = () => {
+  setSearchQuery('');
+  setFilters({ status: '', type: '', amountRange: [0, 1000] });
+  };
+
   return (
-    <VStack spacing={4} align="stretch">
+    <>
+      <h1 hidden>Transaction tracker</h1>
+      <VStack spacing={4} align="stretch">
       {isExportMode ? (
         <Flex justify="space-between" wrap="wrap" mb={4} align="center">
           <Button onClick={handleBack} colorScheme="teal" variant="outline" leftIcon={<IoReturnUpBackSharp size={20}/>}>
@@ -92,6 +99,7 @@ const Home: React.FC = () => {
           setFilters={setFilters}
           onImportClick={() => setImportModalOpen(true)}
           onExportClick={handleExport}
+          onRefreshClick={handleRefresh}
         />
       )}
       {isExportMode ? (
@@ -104,7 +112,7 @@ const Home: React.FC = () => {
             onDelete={handleDelete}
             searchQuery={searchQuery}
             filters={filters}
-          />
+            />
           <ImportModal
             onImport={handleImport}
             isOpen={isImportModalOpen}
@@ -112,7 +120,8 @@ const Home: React.FC = () => {
           />
         </>
       )}
-    </VStack>
+      </VStack>
+    </>
   );
 };
 
