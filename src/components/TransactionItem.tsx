@@ -45,7 +45,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction, onEdit, 
         <Td>{transaction.amount}</Td>
         <Td>
           <IconButton
-            icon={<MdEditSquare size={18} />}
+            icon={<MdEditSquare size={22} />}
             size="md"
             colorScheme="teal"
             variant='ghost'
@@ -53,7 +53,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction, onEdit, 
             aria-label='Edit'
           />
           <IconButton
-            icon={<MdDelete size={18} />}
+            icon={<MdDelete size={22} />}
             size="md"
             colorScheme="teal"
             variant='ghost'
