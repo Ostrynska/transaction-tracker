@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Box, Table, Thead, Tbody, Tr, Th, Text, VStack, useToast } from '@chakra-ui/react';
+import React, { useEffect, useRef } from 'react';
+import { Table, Thead, Tbody, Tr, Th, Text, VStack, useToast, Flex } from '@chakra-ui/react';
 import TransactionItem from './TransactionItem';
 import Pagination from './Pagination/Pagination';
 import { Transaction } from '../db/database';
@@ -16,6 +16,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onEdit,
   const [currentPage, setCurrentPage] = React.useState(0);
   const itemsPerPage = 10;
   const toast = useToast();
+  const toastShown = useRef(false);
 
   const filteredTransactions = transactions.filter((transaction) => {
     const matchesStatus = !filters.status || transaction.status === filters.status;
@@ -26,17 +27,20 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onEdit,
 
   const displayedTransactions = filteredTransactions.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
-   useEffect(() => {
-    if (filteredTransactions.length === 0) {
-      toast({
-        title: 'No results found',
-        description: 'Please try again with a different search',
-        status: 'warning',
-        duration: 5000,
-        isClosable: true,
-      });
-    }
-  }, [filteredTransactions, toast]);
+  useEffect(() => {
+      if (filteredTransactions.length === 0 && !toastShown.current) {
+        toast({
+          title: 'No results found',
+          description: 'Please try again with a different search',
+          status: 'warning',
+          duration: 2000,
+          isClosable: true,
+        });
+        toastShown.current = true;
+      } else if (filteredTransactions.length > 0) {
+        toastShown.current = false;
+      }
+    }, [filteredTransactions, toast]);
 
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected);
@@ -45,7 +49,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onEdit,
   const pageCount = Math.ceil(filteredTransactions.length / itemsPerPage);
 
   return (
-    <Box>
+    <Flex direction='column' justifyContent='space-between' h='77vh'>
       {filteredTransactions.length === 0 ? (
         <VStack spacing={4} mt={4}>
           <Text fontSize="lg" color="gray.500">No results found</Text>
@@ -77,7 +81,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onEdit,
           <Pagination pageCount={pageCount} onPageChange={handlePageClick} />
         </>
       )}
-    </Box>
+    </Flex>
   );
 };
 
