@@ -8,7 +8,7 @@ interface TransactionListProps {
   transactions: Transaction[];
   searchQuery: string;
   filters: { status: string; type: string };
-  onEdit: (id: number) => void;
+  onEdit: (id: number, updatedTransaction: Partial<Transaction>) => void;
   onDelete: (id: number) => void;
 }
 
