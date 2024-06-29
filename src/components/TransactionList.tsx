@@ -100,7 +100,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onEdit,
                         ml={2}
                       />
                     </PopoverTrigger>
-                    <PopoverContent width={400}>
+                    <PopoverContent width={'100%'}>
                       <PopoverArrow />
                       <PopoverCloseButton />
                       <PopoverBody>
@@ -121,7 +121,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onEdit,
                         ml={2}
                       />
                     </PopoverTrigger>
-                    <PopoverContent width={400}>
+                    <PopoverContent width={'100%'}>
                       <PopoverArrow />
                       <PopoverCloseButton />
                       <PopoverBody>
