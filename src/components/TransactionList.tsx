@@ -37,11 +37,11 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onEdit,
         <Thead>
           <Tr>
             <Th>Id</Th>
-            <Th>Status</Th>
-            <Th>Type</Th>
+            <Th width='16%'>Status</Th>
+            <Th width='16%'>Type</Th>
             <Th>Client Name</Th>
-            <Th>Amount</Th>
-            <Th>Action</Th>
+            <Th width='15%'>Amount</Th>
+            <Th width='12%'>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
