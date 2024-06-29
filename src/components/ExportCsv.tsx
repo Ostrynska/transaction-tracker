@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Box, Button, Checkbox, FormControl, FormLabel, Table, Thead, Tbody, Tr, Th, Td, Stack } from '@chakra-ui/react';
+import { Box, Button, Checkbox, FormControl, Table, Thead, Tbody, Tr, Th, Td, Stack } from '@chakra-ui/react';
 import Papa from 'papaparse';
 import { Transaction } from '../db/database';
 import Pagination from './Pagination/Pagination';
