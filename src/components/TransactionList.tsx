@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Text, VStack, useToast, Flex } from '@chakra-ui/react';
 import TransactionItem from './TransactionItem';
 import Pagination from './Pagination/Pagination';
@@ -13,10 +13,17 @@ interface TransactionListProps {
 }
 
 const TransactionList: React.FC<TransactionListProps> = ({ transactions, onEdit, onDelete, searchQuery, filters }) => {
-  const [currentPage, setCurrentPage] = React.useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const itemsPerPage = 10;
   const toast = useToast();
   const toastShown = useRef(false);
+
+  useEffect(() => {
+    if (transactions.length > 0) {
+      setIsLoading(false);
+    }
+  }, [transactions]);
 
   const filteredTransactions = transactions.filter((transaction) => {
     const matchesStatus = !filters.status || transaction.status === filters.status;
@@ -28,19 +35,19 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onEdit,
   const displayedTransactions = filteredTransactions.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
   useEffect(() => {
-      if (filteredTransactions.length === 0 && !toastShown.current) {
-        toast({
-          title: 'No results found',
-          description: 'Please try again with a different search',
-          status: 'warning',
-          duration: 2000,
-          isClosable: true,
-        });
-        toastShown.current = true;
-      } else if (filteredTransactions.length > 0) {
-        toastShown.current = false;
-      }
-    }, [filteredTransactions, toast]);
+    if (!isLoading && filteredTransactions.length === 0 && !toastShown.current) {
+      toast({
+        title: 'No results found',
+        description: 'Please try again with a different search',
+        status: 'warning',
+        duration: 2000,
+        isClosable: true,
+      });
+      toastShown.current = true;
+    } else if (filteredTransactions.length > 0) {
+      toastShown.current = false;
+    }
+  }, [filteredTransactions, toast, displayedTransactions, isLoading]);
 
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected);
