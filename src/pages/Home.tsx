@@ -47,7 +47,18 @@ const Home: React.FC = () => {
   };
 
   const handleEdit = async (id: number, updatedTransaction: Partial<Transaction>) => {
-    editMutation.mutate({ id, ...updatedTransaction });
+    const existingTransaction = transactions.find(transaction => transaction.id === id);
+
+    if (!existingTransaction) {
+      throw new Error('Transaction not found');
+    }
+
+    const transactionToUpdate: Transaction = {
+      ...existingTransaction,
+      ...updatedTransaction
+    };
+
+    editMutation.mutate(transactionToUpdate);
   };
 
   const handleDelete = async (id: number) => {
