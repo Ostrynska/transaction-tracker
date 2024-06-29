@@ -15,7 +15,7 @@ const TransactionBar: React.FC<TransactionBarProps> = ({ searchQuery, setSearchQ
   const inputSize = useBreakpointValue({ base: 'sm', md: 'md' });
 
   return (
-    <Flex justify="space-between" wrap="wrap" mb={4} align="center">
+    <Flex justify="space-between" wrap="wrap" mb='48px' align="center">
     <Box>
        <Flex flex="1" justify="space-between" align="center">
         <InputGroup>
