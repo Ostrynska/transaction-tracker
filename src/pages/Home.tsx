@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { VStack, Box, Button, Flex } from '@chakra-ui/react';
+import { VStack, Button, Flex } from '@chakra-ui/react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { initDatabase, getTransactions, Transaction, addTransactions, updateTransaction, deleteTransaction } from '../db/database';
 import TransactionList from '../components/TransactionList';
