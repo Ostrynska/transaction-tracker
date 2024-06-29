@@ -19,7 +19,7 @@ const Header: React.FC = () => {
           pb={2}
         >
         <Heading as="h2" size="lg" fontSize='24px'>
-            <NavLink to="/"><Text fontWeight="bold">Transaction Tracker</Text>
+            <NavLink to="/"><Text fontWeight="bold" color='teal'>Transaction Tracker</Text>
                 </NavLink>
           </Heading>
                   <Button as={RouterLink} to="/login" colorScheme="teal" size={buttonSize} rightIcon={<IoLogInSharp size={20}/>} >
