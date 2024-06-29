@@ -94,7 +94,7 @@ const ExportCsv: React.FC<ExportCSVProps> = ({ transactions }) => {
         </FormControl>
       </form>
 
-      <Table mt={4} variant="striped" colorScheme="gray">
+      <Table mt={4} variant="striped" colorScheme="gray" height='62vh'>
         <Thead>
           <Tr>
             <Th>
