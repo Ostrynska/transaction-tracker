@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Link, Divider, IconButton } from '@chakra-ui/react';
+import { Box, Flex, Link, Divider } from '@chakra-ui/react';
 import { FaTelegramPlane, FaLinkedin } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
