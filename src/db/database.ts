@@ -2,17 +2,24 @@ import initSqlJs, { Database } from 'sql.js';
 
 let db: Database;
 
+const LOCAL_STORAGE_KEY = 'transactions_db';
+
 export const initDatabase = async () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const SQL = await initSqlJs({ locateFile: (file: any) => `https://sql.js.org/dist/${file}` });
-  db = new SQL.Database();
-  db.run(`CREATE TABLE transactions (
-    id INTEGER PRIMARY KEY,
-    status TEXT,
-    type TEXT,
-    clientName TEXT,
-    amount REAL
-  )`);
+  const SQL = await initSqlJs({ locateFile: (file: unknown) => `https://sql.js.org/dist/${file}` });
+  
+  const savedDb = localStorage.getItem(LOCAL_STORAGE_KEY);
+  if (savedDb) {
+    const savedData = Uint8Array.from(atob(savedDb), c => c.charCodeAt(0));
+    db = new SQL.Database(savedData);
+  } else {
+    db = new SQL.Database();
+    db.run(`CREATE TABLE transactions (
+      id INTEGER PRIMARY KEY,
+      status TEXT,
+      type TEXT,
+      clientName TEXT,
+      amount REAL
+    )`);
 
 const transactions = [
     [1, 'Pending', 'Withdrawal', 'Dale Cotton', 28.43],
@@ -117,11 +124,19 @@ const transactions = [
     [100, 'Pending', 'Withdrawal', 'Mark Velazquez', 66.59]
   ];
 
-const stmt = db.prepare("INSERT INTO transactions (id, status, type, clientName, amount) VALUES (?, ?, ?, ?, ?)");
-  transactions.forEach(transaction => {
-    stmt.run(transaction);
-  });
-  stmt.free();
+ const stmt = db.prepare("INSERT INTO transactions (id, status, type, clientName, amount) VALUES (?, ?, ?, ?, ?)");
+    transactions.forEach(transaction => {
+      stmt.run(transaction);
+    });
+    stmt.free();
+    saveDatabase();
+  }
+};
+
+const saveDatabase = () => {
+  const data = db.export();
+  const base64Data = btoa(String.fromCharCode.apply(null, data));
+  localStorage.setItem(LOCAL_STORAGE_KEY, base64Data);
 };
 
 export const getTransactions = (): Transaction[] => {
@@ -135,24 +150,27 @@ export const getTransactions = (): Transaction[] => {
   }));
 };
 
-export const addTransactions = (transactions: Transaction[]) => {
+export const addTransactions = async (transactions: Transaction[]): Promise<void> => {
   const stmt = db.prepare("INSERT INTO transactions (status, type, clientName, amount) VALUES (?, ?, ?, ?)");
   transactions.forEach(transaction => {
     stmt.run([transaction.status, transaction.type, transaction.clientName, transaction.amount]);
   });
   stmt.free();
+  saveDatabase();
 };
 
-export const updateTransaction = (transaction: Transaction) => {
+export const updateTransaction = async (transaction: Transaction): Promise<void> => {
   const stmt = db.prepare("UPDATE transactions SET status = ?, type = ?, clientName = ?, amount = ? WHERE id = ?");
   stmt.run([transaction.status, transaction.type, transaction.clientName, transaction.amount, transaction.id]);
   stmt.free();
+  saveDatabase();
 };
 
-export const deleteTransaction = (id: number) => {
+export const deleteTransaction = async (id: number): Promise<void> => {
   const stmt = db.prepare("DELETE FROM transactions WHERE id = ?");
   stmt.run([id]);
   stmt.free();
+  saveDatabase();
 };
 
 export interface Transaction {
