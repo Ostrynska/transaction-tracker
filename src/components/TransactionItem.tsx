@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Tr, Td, Button, useBreakpointValue, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, IconButton } from '@chakra-ui/react';
+import React from 'react';
+import { Tr, Td, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, IconButton, Button } from '@chakra-ui/react';
 import { MdDelete, MdEditSquare } from "react-icons/md";
 import EditModal from './EditModal';
 
@@ -43,24 +43,24 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction, onEdit, 
         <Td>{transaction.type}</Td>
         <Td>{transaction.clientName}</Td>
         <Td>{transaction.amount}</Td>
-              <Td>
-        <IconButton
-          icon={<MdEditSquare size={18}/>}
-          size="md"
-          colorScheme="teal"
-          variant='ghost'
-          onClick={handleEditClick} 
-          aria-label='Edit'
-                  />
-        <IconButton
-          icon={<MdDelete size={18}/>}
-          size="md"
-          colorScheme="teal"
-                      variant='ghost'
-                      ml={2} 
-                      onClick={handleDeleteClick} 
-                      aria-label='Delete'
-        />
+        <Td>
+          <IconButton
+            icon={<MdEditSquare size={18} />}
+            size="md"
+            colorScheme="teal"
+            variant='ghost'
+            onClick={handleEditClick}
+            aria-label='Edit'
+          />
+          <IconButton
+            icon={<MdDelete size={18} />}
+            size="md"
+            colorScheme="teal"
+            variant='ghost'
+            ml={2}
+            onClick={handleDeleteClick}
+            aria-label='Delete'
+          />
         </Td>
       </Tr>
 
@@ -74,11 +74,9 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction, onEdit, 
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
               Delete Transaction
             </AlertDialogHeader>
-
             <AlertDialogBody>
               Are you sure you want to delete this transaction? This action cannot be undone.
             </AlertDialogBody>
-
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onDeleteClose}>
                 Cancel
