@@ -83,12 +83,9 @@ const Home: React.FC = () => {
       <h1 hidden>Transaction tracker</h1>
       <VStack spacing={4} align="stretch">
       {isExportMode ? (
-        <Flex justify="space-between" wrap="wrap" mb={4} align="center">
+        <Flex justify="space-between" wrap="wrap" align="center">
           <Button onClick={handleBack} colorScheme="teal" variant="outline" leftIcon={<IoReturnUpBackSharp size={20}/>}>
             Back
-          </Button>
-          <Button onClick={() => setIsExportMode(true)} colorScheme="teal" variant="outline">
-            Export
           </Button>
         </Flex>
       ) : (
