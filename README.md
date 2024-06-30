@@ -1,6 +1,8 @@
 # Transaction Management Application
 
 This application is designed to manage transactions efficiently, allowing users to import, export, edit, and delete transactions with ease. Built with modern React practices, it ensures a smooth and responsive user experience.
+![image](https://github.com/Ostrynska/transaction-tracker/assets/105549205/a20b1b4f-f46f-43c2-ae71-9eaf017183dc)
+
 
 ## Features
 
