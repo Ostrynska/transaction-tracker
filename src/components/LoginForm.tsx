@@ -1,24 +1,9 @@
-import React, { useEffect } from 'react';
-import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Center, useToast } from '@chakra-ui/react';
-import { useAuth0 } from "@auth0/auth0-react";
+import React from 'react';
+import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Center } from '@chakra-ui/react';
 
 const LoginForm: React.FC = () => {
-  const toast = useToast();
-  const { loginWithRedirect } = useAuth0();
-
-  useEffect(() => {
-    toast({
-      title: "Under Development",
-      description: "This page is still under development. Please check back later.",
-      status: "info",
-      duration: 1000,
-      isClosable: true,
-      position: "top",
-    });
-  }, [toast]);
-
-  // const handleLogin = () => {
-  // };
+  const handleLogin = () => {
+  };
 
   return (
     <Center mt={160}>
@@ -41,7 +26,7 @@ const LoginForm: React.FC = () => {
             <FormLabel>Password</FormLabel>
             <Input type="password" />
           </FormControl>
-          <Button colorScheme="teal" size="md" onClick={() => loginWithRedirect()}>
+          <Button colorScheme="teal" size="md" onClick={handleLogin}>
             Login
           </Button>
         </VStack>
