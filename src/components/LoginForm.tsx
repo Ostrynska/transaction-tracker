@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Center, useToast } from '@chakra-ui/react';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const LoginForm: React.FC = () => {
   const toast = useToast();
+  const { loginWithRedirect } = useAuth0();
 
   useEffect(() => {
     toast({
@@ -15,8 +17,8 @@ const LoginForm: React.FC = () => {
     });
   }, [toast]);
 
-  const handleLogin = () => {
-  };
+  // const handleLogin = () => {
+  // };
 
   return (
     <Center mt={160}>
@@ -39,7 +41,7 @@ const LoginForm: React.FC = () => {
             <FormLabel>Password</FormLabel>
             <Input type="password" />
           </FormControl>
-          <Button colorScheme="teal" size="md" onClick={handleLogin}>
+          <Button colorScheme="teal" size="md" onClick={() => loginWithRedirect()}>
             Login
           </Button>
         </VStack>
