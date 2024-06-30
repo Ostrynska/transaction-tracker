@@ -1,8 +1,31 @@
-import React from 'react';
-import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Center } from '@chakra-ui/react';
+import React, {useEffect} from 'react';
+import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Center, useToast } from '@chakra-ui/react';
 
-const LoginForm: React.FC = () => {
-  const handleLogin = () => {
+const LoginForm: React.FC = () =>
+{
+  const toast = useToast();
+
+  useEffect(() => {
+    toast({
+      title: "Under Development",
+      description: "This page is still under development. Please check back later.",
+      status: "info",
+      duration: 1000,
+      isClosable: true,
+      position: "top",
+    });
+  }, [toast]);
+
+  const handleLogin = () =>
+  {
+    toast({
+      title: "Under Development",
+      description: "Site Under Construction. We are currently working on our website. Please check back later.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
   };
 
   return (
