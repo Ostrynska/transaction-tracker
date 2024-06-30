@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './components/App.tsx'
-import './styles/index.css';
 import theme from './styles/chakra';
 
 const queryClient = new QueryClient();
