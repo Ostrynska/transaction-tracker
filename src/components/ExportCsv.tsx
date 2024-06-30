@@ -82,19 +82,19 @@ const ExportCsv: React.FC<ExportCSVProps> = ({ transactions }) => {
   return (
     <Box>
       <form onSubmit={handleSubmit(onExportSubmit)}>
-        <FormControl as="fieldset" bg='#EDF2F7' p={6} borderRadius="md" boxShadow="md" display='flex' alignItems='center' flexDirection='row' justifyContent='space-between' mb={12}>
-          <Button type="submit" colorScheme="teal">Export CSV</Button>
-          <Stack spacing={3} direction="row" fontWeight='600'>
+        <FormControl as="fieldset" bg='#EDF2F7' p={4} borderRadius="md" boxShadow="md" display='flex' alignItems='center' flexDirection='row' justifyContent='space-between'>
+          <Stack spacing={3} direction="row" fontWeight='500'>
             <Checkbox {...register('id')} border='teal'>ID</Checkbox>
             <Checkbox {...register('status')} border='teal'>Status</Checkbox>
             <Checkbox {...register('type')} border='teal'>Type</Checkbox>
             <Checkbox {...register('clientName')} border='teal'>Client Name</Checkbox>
             <Checkbox {...register('amount')} border='teal'>Amount</Checkbox>
           </Stack>
+          <Button type="submit" colorScheme="teal">Export CSV</Button>
         </FormControl>
       </form>
 
-      <Table mt={4} variant="striped" colorScheme="gray" height='62vh'>
+      <Table mt={4} variant="striped" colorScheme="gray">
         <Thead>
           <Tr>
             <Th>
