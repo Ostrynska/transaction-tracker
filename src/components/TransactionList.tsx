@@ -77,14 +77,14 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions, onEdit,
   const pageCount = Math.ceil(filteredTransactions.length / itemsPerPage);
 
   return (
-    <Flex direction='column' justifyContent='space-between' h='77vh'>
+    <Flex direction='column' justifyContent='space-between'>
       {filteredTransactions.length === 0 ? (
         <VStack spacing={4} mt={4}>
           <Text fontSize="lg" color="gray.500">No results found</Text>
         </VStack>
       ) : (
         <>
-          <Table mt={4} variant="striped" colorScheme="gray">
+          <Table mt={4} variant="striped" colorScheme="gray" size='sm'>
             <Thead>
               <Tr>
                 <Th>Id</Th>
